@@ -18,14 +18,5 @@ RUN echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config
 RUN echo root:${Password}|chpasswd
 RUN service ssh start
 RUN chmod 755 /1.sh
-EXPOSE 80 8888 8080 443 5130 5131 5132 5133 5134 5135 3306 3389
-# Install Chrome Remote Desktop
-RUN wget -q https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb
-RUN dpkg -i chrome-remote-desktop_current_amd64.deb
-RUN apt install --assume-yes --fix-broken
-
-# Set up Chrome Remote Desktop
-RUN DEBIAN_FRONTEND=noninteractive apt install --assume-yes xfce4 desktop-base
-RUN bash -c 'echo "exec /etc/X11/Xsession /usr/bin/xfce4-session" > /etc/chrome-remote-desktop-session'
-
-CMD ["bash", "/1.sh"]
+EXPOSE 80 8888 8080 443 5130 5131 5132 5133 5134 5135 3306
+CMD  /1.sh
