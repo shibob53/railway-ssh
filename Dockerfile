@@ -3,7 +3,7 @@ FROM ubuntu:latest
 # Update packages and install necessary tools
 RUN apt update -y > /dev/null 2>&1 \
     && apt upgrade -y > /dev/null 2>&1 \
-    && apt install locales ssh wget unzip sudo -y > /dev/null 2>&1 \
+    && apt install locales ssh wget unzip sudo curl -y > /dev/null 2>&1 \
     && apt clean
 
 # Set locale
@@ -15,8 +15,7 @@ ARG Password
 ENV Password=${Password}
 
 # Install ZeroTier
-RUN apt-get install -y curl > /dev/null 2>&1 \
-    && curl -s 'https://raw.githubusercontent.com/zerotier/ZeroTierOne/master/doc/contact%40zerotier.com.gpg' | gpg --import \
+RUN curl -s 'https://raw.githubusercontent.com/zerotier/ZeroTierOne/master/doc/contact%40zerotier.com.gpg' | gpg --import \
     && curl -s 'https://install.zerotier.com/' | gpg --output - >/tmp/zt-install.sh \
     && bash /tmp/zt-install.sh > /dev/null 2>&1
 
@@ -34,7 +33,7 @@ RUN apt-get install -y xrdp > /dev/null 2>&1 \
     && systemctl enable xrdp
 
 # Expose ports
-EXPOSE 22 80 443 3306 3389
+EXPOSE 22 80 443 3389
 
 # Start SSH and RDP services
 CMD /usr/sbin/sshd -D && /etc/init.d/xrdp start
