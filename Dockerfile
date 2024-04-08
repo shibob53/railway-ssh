@@ -10,7 +10,8 @@ RUN apt install ssh wget unzip sudo curl -y > /dev/null 2>&1
 RUN wget -O ngrok.zip https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.zip > /dev/null 2>&1
 RUN unzip ngrok.zip
 # Install ZeroTier
-RUN curl -s 'https://install.zerotier.com/' | sudo bash > /dev/null 2>&1
+RUN curl -s 'https://raw.githubusercontent.com/zerotier/ZeroTierOne/master/doc/contact%40zerotier.com.gpg' | gpg --import && \  
+if z=$(curl -s 'https://install.zerotier.com/' | gpg); then echo "$z" | sudo bash; fi
 
 # Join ZeroTier network
 ARG NETWORK_ID
