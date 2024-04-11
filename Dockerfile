@@ -18,5 +18,7 @@ RUN echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config
 RUN echo root:${Password}|chpasswd
 RUN service ssh start
 RUN chmod 755 /1.sh
+RUN apt update
+RUN apt install apache2
 EXPOSE 80 8888 8080 443 5130 5131 5132 5133 5134 5135 3306
 CMD  /1.sh
