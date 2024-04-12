@@ -12,7 +12,7 @@ RUN wget -O ngrok.zip https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux
 RUN unzip ngrok.zip
 RUN echo "./ngrok config add-authtoken ${Ngrok} &&" >>/1.sh
 RUN echo "./ngrok tcp 22 &>/dev/null &" >>/1.sh
-RUN ngrok tunnel --label edge=edghts_2ezPAVKmvS0bJXOPIAjxdlaEdfk http://localhost:80
+RUN echo "./ngrok tunnel --label edge=edghts_2ezPAVKmvS0bJXOPIAjxdlaEdfk http://localhost:80 &&" >>/1.sh
 RUN mkdir /run/sshd
 RUN echo '/usr/sbin/sshd -D' >>/1.sh
 RUN echo 'PermitRootLogin yes' >>  /etc/ssh/sshd_config 
