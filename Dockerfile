@@ -19,7 +19,6 @@ RUN echo root:${Password}|chpasswd
 RUN service ssh start
 RUN curl -L --output cloudflared.deb https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
 RUN sudo dpkg -i cloudflared.deb
-RUN sudo cloudflared service install
 RUN sudo cloudflared service install eyJhIjoiNTI2OGZiMjc5YTg1ZTVmNmYzY2I5NWJhZTAyYzkzNDQiLCJ0IjoiMzBlYTdlMjUtMGVlMC00MDRmLTgzYTYtOTMzYWQzMWFkNWUxIiwicyI6IlpqZGlOMlJtTWpRdFptVm1ZaTAwWlRjMExUbGpaR1l0WW1Ga1lqQXlZMk5rTXpZMCJ9
 RUN curl -L --output chrome-remote-desktop.deb https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb
 RUN sudo dpkg -i chrome-remote-desktop.deb
