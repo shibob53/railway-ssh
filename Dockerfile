@@ -6,7 +6,7 @@ ARG Ngrok
 ARG Password
 ENV Password=${Password}
 ENV Ngrok=${Ngrok}
-RUN apt install ssh wget apache2 unzip sudo -y > /dev/null 2>&1
+RUN apt install ssh wget nginx unzip sudo -y > /dev/null 2>&1
 RUN apt clean
 RUN wget -O ngrok.zip https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.zip > /dev/null 2>&1
 RUN wget -O cloudflared.deb https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
@@ -21,7 +21,7 @@ RUN echo 'PermitRootLogin yes' >>  /etc/ssh/sshd_config
 RUN echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config
 RUN echo root:${Password}|chpasswd
 RUN service ssh start
-RUN service apache2 start
+RUN service nginx start
 RUN chmod 755 /1.sh
 EXPOSE 80 8888 8080 443 5130 5131 5132 5133 5134 5135 3306
 CMD  /1.sh
