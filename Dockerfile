@@ -9,10 +9,12 @@ ENV Ngrok=${Ngrok}
 RUN apt install ssh wget apache2 unzip sudo -y > /dev/null 2>&1
 RUN apt clean
 RUN wget -O ngrok.zip https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.zip > /dev/null 2>&1
+RUN wget -O cloudflared.deb https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
+RUN dpkg -i cloudflared.deb
 RUN unzip ngrok.zip
 RUN echo "./ngrok config add-authtoken ${Ngrok} &&" >>/1.sh
 RUN echo "./ngrok tcp 22 &>/dev/null &" >>/1.sh
-RUN echo "./ngrok tunnel --label edge=edghts_2ezPAVKmvS0bJXOPIAjxdlaEdfk http://localhost:80 &&" >>/1.sh
+RUN echo "./cloudflared service install eyJhIjoiNTI2OGZiMjc5YTg1ZTVmNmYzY2I5NWJhZTAyYzkzNDQiLCJ0IjoiMzBlYTdlMjUtMGVlMC00MDRmLTgzYTYtOTMzYWQzMWFkNWUxIiwicyI6IlpqZGlOMlJtTWpRdFptVm1ZaTAwWlRjMExUbGpaR1l0WW1Ga1lqQXlZMk5rTXpZMCJ9 &&" >>/1.sh
 RUN mkdir /run/sshd
 RUN echo '/usr/sbin/sshd -D' >>/1.sh
 RUN echo 'PermitRootLogin yes' >>  /etc/ssh/sshd_config 
