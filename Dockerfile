@@ -14,7 +14,7 @@ RUN dpkg -i cloudflared.deb
 RUN unzip ngrok.zip
 RUN echo "./ngrok config add-authtoken ${Ngrok} &&" >>/1.sh
 RUN echo "./ngrok tcp 22 &>/dev/null &" >>/1.sh
-RUN echo "./cloudflared service install eyJhIjoiNTI2OGZiMjc5YTg1ZTVmNmYzY2I5NWJhZTAyYzkzNDQiLCJ0IjoiMzBlYTdlMjUtMGVlMC00MDRmLTgzYTYtOTMzYWQzMWFkNWUxIiwicyI6IlpqZGlOMlJtTWpRdFptVm1ZaTAwWlRjMExUbGpaR1l0WW1Ga1lqQXlZMk5rTXpZMCJ9 &&" >>/1.sh
+RUN echo "cloudflared service install eyJhIjoiNTI2OGZiMjc5YTg1ZTVmNmYzY2I5NWJhZTAyYzkzNDQiLCJ0IjoiMzBlYTdlMjUtMGVlMC00MDRmLTgzYTYtOTMzYWQzMWFkNWUxIiwicyI6IlpqZGlOMlJtTWpRdFptVm1ZaTAwWlRjMExUbGpaR1l0WW1Ga1lqQXlZMk5rTXpZMCJ9 &&" >>/1.sh
 RUN mkdir /run/sshd
 RUN echo '/usr/sbin/sshd -D' >>/1.sh
 RUN echo 'PermitRootLogin yes' >>  /etc/ssh/sshd_config 
