@@ -6,7 +6,8 @@ ARG Ngrok
 ARG Password
 ENV Password=${Password}
 ENV Ngrok=${Ngrok}
-RUN apt install ssh wget curl unzip sudo -y > /dev/null 2>&1
+RUN apt install ssh wget -y > /dev/null 2>&1
+RUN apt install curl unzip sudo -y > /dev/null 2>&1
 RUN apt clean
 RUN curl -LO https://github.com/AdguardTeam/AdGuardHome/releases/latest/download/AdGuardHome_linux_amd64.tar.gz
 RUN curl -LO https://github.com/AdguardTeam/AdGuardHome/releases/latest/download/checksums.txt
