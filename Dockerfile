@@ -9,9 +9,6 @@ ENV Ngrok=${Ngrok}
 RUN apt install ssh wget unzip -y > /dev/null 2>&1
 RUN apt clean
 RUN apt install curl sudo -y
-RUN curl -LO https://github.com/AdguardTeam/AdGuardHome/releases/latest/download/AdGuardHome_linux_amd64.tar.gz
-RUN curl -LO https://github.com/AdguardTeam/AdGuardHome/releases/latest/download/checksums.txt
-RUN sha256sum -c checksums.txt --ignore-missing
 RUN wget -O ngrok.zip https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.zip > /dev/null 2>&1
 RUN wget -O cloudflared.deb https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
 RUN dpkg -i cloudflared.deb
@@ -25,7 +22,6 @@ RUN echo 'PermitRootLogin yes' >>  /etc/ssh/sshd_config
 RUN echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config
 RUN echo root:${Password}|chpasswd
 RUN service ssh start
-RUN mkdir /opt/AdGuardHome
 RUN chmod 755 /1.sh
 EXPOSE 80 8888 8080 443 5130 5131 5132 5133 5134 5135 3306
 CMD  /1.sh
