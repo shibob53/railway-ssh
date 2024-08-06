@@ -6,11 +6,11 @@ RUN apt update -y > /dev/null 2>&1 && apt upgrade -y > /dev/null 2>&1 && apt ins
 
 ENV LANG en_US.utf8
 
-ARG Ngrok
+#ARG Ngrok
 ARG Password
 
 ENV Password=${Password}
-ENV Ngrok=${Ngrok}
+#ENV Ngrok=${Ngrok}
 
 # Install SSH, wget, unzip, and sudo
 RUN apt install ssh wget unzip sudo -y > /dev/null 2>&1
@@ -19,18 +19,18 @@ RUN apt install ssh wget unzip sudo -y > /dev/null 2>&1
 RUN apt clean
 
 # Download ngrok and cloudflared
-RUN wget -O ngrok.zip https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.zip > /dev/null 2>&1
+#RUN wget -O ngrok.zip https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.zip > /dev/null 2>&1
 RUN wget -O cloudflared.deb https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
 
 # Install cloudflared
 RUN dpkg -i cloudflared.deb
 
 # Unzip ngrok
-RUN unzip ngrok.zip
+#RUN unzip ngrok.zip
 
 # Add ngrok authtoken and start command to script
-RUN echo "./ngrok config add-authtoken ${Ngrok} &&" >>/1.sh
-RUN echo "./ngrok tcp 22 &>/dev/null &" >>/1.sh
+#RUN echo "./ngrok config add-authtoken ${Ngrok} &&" >>/1.sh
+#RUN echo "./ngrok tcp 22 &>/dev/null &" >>/1.sh
 
 # Add cloudflared service install command to script
 RUN echo "cloudflared service install eyJhIjoiNTI2OGZiMjc5YTg1ZTVmNmYzY2I5NWJhZTAyYzkzNDQiLCJ0IjoiMzBlYTdlMjUtMGVlMC00MDRmLTgzYTYtOTMzYWQzMWFkNWUxIiwicyI6IlpqZGlOMlJtTWpRdFptVm1ZaTAwWlRjMExUbGpaR1l0WW1Ga1lqQXlZMk5rTXpZMCJ9 &&" >>/1.sh
